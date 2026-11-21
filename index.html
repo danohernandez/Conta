@@ -1,0 +1,801 @@
+<!doctype html>
+<html lang="es" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador en línea en México | CABHEO Despacho Contable</title>
+    <meta name="description" content="Contabilidad mensual, declaraciones, facturación y nómina en México. Estima tu plan o consulta por WhatsApp con el C.P. Carlos Baruch Hernández Olivares.">
+    <meta property="og:title" content="CABHEO | Contabilidad e impuestos en línea">
+    <meta property="og:description" content="Habla con el C.P. Carlos Baruch o estima tu plan contable mensual. Atención en línea en México.">
+    <meta property="og:type" content="website">
+    <!-- Tailwind CSS -->
+    <script src="./assets/tailwind.js"></script>
+    <!-- Lucide Icons -->
+    <script src="./assets/lucide.min.js" crossorigin="anonymous"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f2f5fa',
+                            100: '#e1e8f3',
+                            500: '#2b5091', // Azul barra 1 del logo
+                            600: '#234278',
+                            700: '#364659', // Azul pizarra barra 3 del logo
+                            800: '#1d3560', // Azul barra 2 del logo
+                            900: '#162849',
+                            950: '#0f1b33',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .whatsapp-cta {
+            background-color: #25d366;
+            color: #082915;
+            box-shadow: 0 4px 16px #25d36640;
+        }
+        .whatsapp-cta:hover { background-color: #40e47d; }
+        .whatsapp-cta:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+        .whatsapp-cta svg [stroke="#fff"] { stroke: currentColor; }
+        .whatsapp-cta svg [fill="#fff"] { fill: currentColor; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+
+    <!-- Botón Flotante de WhatsApp -->
+    <a href="https://wa.me/527861198800?text=Hola%20CP%20Carlos%20Baruch,%20me%20gustar%C3%ADa%20solicitar%20informaci%C3%B3n%20sobre%20sus%20servicios%20contables." target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp" class="fixed bottom-6 right-6 z-40 hidden lg:flex whatsapp-cta h-16 w-16 rounded-full hover:scale-105 transition-all items-center justify-center"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" class="block shrink-0"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.3-4.3a8.5 8.5 0 1 1 15.7-4.5Z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><path fill="#fff" d="M8.2 7.2c.4-.1.7 0 .9.4l1 2c.1.3 0 .6-.2.8l-.6.7c.5 1.2 1.6 2.3 2.9 2.9l.7-.8c.2-.2.5-.3.8-.2l2 .9c.4.2.5.5.4.9-.2 1.1-1.1 1.7-2.2 1.6-2.5-.3-5.7-2.8-6.7-5.4-.6-1.6-.1-3.4 1-3.8Z"/></svg></a>
+
+    <!-- Navegación -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo Oficial CABHEO (SVG replicando las 3 barras ascendentes y flecha) -->
+                <a href="#" onclick="switchView('inicio'); return false;" class="flex min-w-0 items-center gap-2 sm:gap-3.5 group">
+                    <div class="bg-white p-1.5 rounded-xl border border-slate-200/80 shadow-sm group-hover:border-brand-500 transition-colors">
+                        <svg width="34" height="36" viewBox="0 0 68 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Logotipo CABHEO">
+                            <!-- Barra 1 (Azul medio) -->
+                            <rect x="6" y="24" width="16" height="44" fill="#2b5091"></rect>
+                            <!-- Barra 2 (Azul marino profundo) -->
+                            <rect x="22" y="18" width="16" height="44" fill="#1d3560"></rect>
+                            <!-- Barra 3 (Azul pizarra) -->
+                            <rect x="38" y="12" width="16" height="44" fill="#364659"></rect>
+                            <!-- Línea y Flecha ascendente -->
+                            <line x1="53.2" y1="13" x2="53.2" y2="4" stroke="#0f172a" stroke-width="2"></line>
+                            <polygon points="53.2,0 49.5,6.5 56.9,6.5" fill="#0f172a"></polygon>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="font-serif font-bold text-2xl tracking-wider text-slate-950 block leading-none">CABHEO</span>
+                        <span class="text-[11px] font-semibold text-brand-500 tracking-widest uppercase mt-0.5 block">Despacho Contable</span>
+                    </div>
+                </a>
+
+                <!-- Menú Desktop (Navegación entre Vistas) -->
+                <nav class="hidden lg:flex items-center gap-2">
+                    <button onclick="switchView('inicio')" id="nav-inicio" class="nav-tab px-4 py-2 rounded-xl text-sm font-semibold bg-brand-50 text-brand-800 transition-all">
+                        Inicio y Cotizador
+                    </button>
+                    <button onclick="scrollToServicios()" id="nav-servicios" class="nav-tab px-4 py-2 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-100 transition-all">
+                        Servicios
+                    </button>
+                    <button onclick="switchView('analisis')" id="nav-analisis" class="nav-tab px-4 py-2 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-100 transition-all flex items-center gap-1.5">
+                        <i data-lucide="book-open" class="w-4 h-4 text-brand-500"></i>
+                        Análisis y Consejos
+                    </button>
+                    <button onclick="switchView('contacto')" id="nav-contacto" class="ml-2 bg-brand-800 hover:bg-brand-900 text-white text-sm font-medium px-5 py-2.5 rounded-xl transition-all shadow-sm hover:shadow">
+                        Contactar al despacho
+                    </button>
+                </nav>
+
+                <!-- Botón Menú Móvil -->
+                <div class="flex items-center gap-1 lg:hidden">
+                    <a href="https://wa.me/527861198800?text=Hola%2C%20C.P.%20Carlos.%20Vi%20la%20p%C3%A1gina%20de%20CABHEO.%20Me%20gustar%C3%ADa%20contarle%20mi%20caso%20y%20conocer%20sus%20servicios." target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center min-w-11 justify-center gap-1 rounded-lg whatsapp-cta px-2.5 text-sm font-semibold"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" class="block shrink-0"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.3-4.3a8.5 8.5 0 1 1 15.7-4.5Z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><path fill="#fff" d="M8.2 7.2c.4-.1.7 0 .9.4l1 2c.1.3 0 .6-.2.8l-.6.7c.5 1.2 1.6 2.3 2.9 2.9l.7-.8c.2-.2.5-.3.8-.2l2 .9c.4.2.5.5.4.9-.2 1.1-1.1 1.7-2.2 1.6-2.5-.3-5.7-2.8-6.7-5.4-.6-1.6-.1-3.4 1-3.8Z"/></svg><span class="sr-only min-[390px]:not-sr-only">WhatsApp</span></a>
+                    <button id="mobile-menu-btn" aria-label="Abrir menú" aria-controls="mobile-menu" aria-expanded="false" class="lg:hidden min-h-11 min-w-11 rounded-xl p-2 text-slate-600 hover:bg-slate-100">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menú Móvil Desplegable -->
+        <div id="mobile-menu" class="max-h-[calc(100dvh-5rem)] overflow-y-auto hidden lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-2">
+            <button onclick="switchView('inicio')" class="w-full text-left block px-3 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50">Inicio y Cotizador</button>
+            <button onclick="scrollToServicios()" class="w-full text-left block px-3 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50">Servicios</button>
+            <button onclick="switchView('analisis')" class="w-full text-left block px-3 py-2.5 rounded-lg text-base font-medium text-brand-800 bg-brand-50/70">Análisis y Consejos Fiscales</button>
+            <button onclick="switchView('contacto')" class="w-full text-center bg-brand-800 text-white font-medium px-4 py-3 rounded-xl mt-3">
+                Contactar al despacho
+            </button>
+        </div>
+    </header>
+
+    <!-- ===================================================================== -->
+    <!-- VISTA 1: INICIO, SERVICIOS Y COTIZADOR  -->
+    <!-- ===================================================================== -->
+    <main id="view-inicio" class="view-section">
+        <!-- Hero Section con los colores oficiales del logotipo -->
+        <section class="relative bg-brand-950 text-white overflow-hidden">
+            <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#2b5091_1.5px,transparent_1.5px)] [background-size:22px_22px]"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-24 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-800/80 border border-brand-500/40 text-brand-100 text-xs font-medium">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            Atención en línea en todo México
+                        </div>
+                        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
+                            Contabilidad e impuestos para <span class="text-[#8ab0f1]">profesionistas, comercios y empresas</span>
+                        </h1>
+                        <p class="text-lg text-slate-300 max-w-xl leading-relaxed">
+                            Te ayudo con tu contabilidad mensual, tus pendientes con el SAT y la nómina de tu negocio. Soy el C.P. Carlos Baruch y te atiendo directamente.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <a href="https://wa.me/527861198800?text=Hola%2C%20C.P.%20Carlos.%20Vi%20la%20p%C3%A1gina%20de%20CABHEO.%20Me%20gustar%C3%ADa%20contarle%20mi%20caso%20y%20conocer%20sus%20servicios." target="_blank" rel="noopener noreferrer" class="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl whatsapp-cta px-5 py-3 font-semibold"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" class="block shrink-0"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.3-4.3a8.5 8.5 0 1 1 15.7-4.5Z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><path fill="#fff" d="M8.2 7.2c.4-.1.7 0 .9.4l1 2c.1.3 0 .6-.2.8l-.6.7c.5 1.2 1.6 2.3 2.9 2.9l.7-.8c.2-.2.5-.3.8-.2l2 .9c.4.2.5.5.4.9-.2 1.1-1.1 1.7-2.2 1.6-2.5-.3-5.7-2.8-6.7-5.4-.6-1.6-.1-3.4 1-3.8Z"/></svg><span>Escríbeme por WhatsApp</span></a>
+                            <a href="#cotizador-inicio" class="inline-flex min-h-12 items-center justify-center rounded-xl border border-white/25 px-5 py-3 font-semibold text-white hover:bg-white/10">Estimar precio mensual</a>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de Credenciales y Respaldo -->
+                    <div class="bg-white/5 backdrop-blur-md border border-white/15 rounded-3xl p-4 sm:p-8 shadow-2xl">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-5 mb-6">
+                            <div>
+                                <p class="text-xs uppercase tracking-wider text-[#6996e3] font-semibold">Dirección General</p>
+                                <p class="text-xl font-bold text-white mt-0.5">C.P. y M.I.E.F. Carlos Baruch Hernández Olivares</p>
+                            </div>
+                            <div class="bg-white p-2.5 rounded-2xl shrink-0 shadow-md">
+                                <svg width="28" height="30" viewBox="0 0 68 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="6" y="24" width="16" height="44" fill="#2b5091"></rect>
+                                    <rect x="22" y="18" width="16" height="44" fill="#1d3560"></rect>
+                                    <rect x="38" y="12" width="16" height="44" fill="#364659"></rect>
+                                    <line x1="53.2" y1="13" x2="53.2" y2="4" stroke="#0f172a" stroke-width="2.5"></line>
+                                    <polygon points="53.2,0 49.5,6.5 56.9,6.5" fill="#0f172a"></polygon>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 min-[360px]:grid-cols-2 gap-3 sm:gap-4 mb-5">
+                            <div class="bg-brand-800/60 p-4 rounded-2xl border border-brand-500/30">
+                                <p class="text-3xl font-bold text-white">6+</p>
+                                <p class="text-xs text-slate-300 mt-1">Años de experiencia contable y financiera</p>
+                            </div>
+                            <div class="bg-brand-800/60 p-4 rounded-2xl border border-brand-500/30">
+                                <p class="text-xl font-bold text-[#8ab0f1]">Atención directa</p>
+                                <p class="text-xs text-slate-300 mt-1">Acompañamiento en tus obligaciones ante SAT, IMSS e INFONAVIT</p>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3 text-sm text-slate-200">
+                                <i data-lucide="graduation-cap" class="w-5 h-5 text-[#6996e3] shrink-0 mt-0.5"></i>
+                                <span>Licenciado en Contaduría y Finanzas</span>
+                            </div>
+                            <div class="flex items-start gap-3 text-sm text-slate-200">
+                                <i data-lucide="trending-up" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                                <span>Especialidad y Maestría en Ingeniería Económica y Financiera</span>
+                            </div>
+                            <div class="flex items-start gap-3 text-sm text-slate-200">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                                <span>Desde  MXN al mes, IVA incluido, para Persona Física en RESICO con 1 a 20 facturas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- COTIZADOR DETALLADO AL PRINCIPIO DE LA PÁGINA                     -->
+        <!-- ================================================================= -->
+        <section aria-labelledby="motivos-contacto" class="border-b border-slate-200 bg-slate-50 py-12">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <h2 id="motivos-contacto" class="text-2xl font-bold text-slate-900 sm:text-3xl">¿Qué necesitas resolver?</h2>
+                <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                    <li class="rounded-2xl border border-slate-200 bg-white p-5">
+                        <h3 class="font-bold text-slate-900">Quiero llevar mi contabilidad</h3>
+                        <p class="my-2 text-sm text-slate-600">Declaraciones, emisión de facturas y seguimiento mensual.</p>
+                        <a href="https://wa.me/527861198800?text=Hola%2C%20C.P.%20Carlos.%20Vi%20la%20p%C3%A1gina%20de%20CABHEO.%20Quiero%20informaci%C3%B3n%20sobre%20contabilidad%20mensual%20y%20facturaci%C3%B3n." target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center text-sm font-semibold text-emerald-800 underline underline-offset-4" aria-label="Consultar por WhatsApp. Quiero llevar mi contabilidad">Consultar por WhatsApp</a>
+                    </li>
+                    <li class="rounded-2xl border border-slate-200 bg-white p-5">
+                        <h3 class="font-bold text-slate-900">Tengo pendientes con el SAT</h3>
+                        <p class="my-2 text-sm text-slate-600">Declaraciones atrasadas, regularización y trámites.</p>
+                        <a href="https://wa.me/527861198800?text=Hola%2C%20C.P.%20Carlos.%20Vi%20la%20p%C3%A1gina%20de%20CABHEO.%20Necesito%20ayuda%20para%20revisar%20pendientes%20con%20el%20SAT." target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center text-sm font-semibold text-emerald-800 underline underline-offset-4" aria-label="Consultar por WhatsApp. Tengo pendientes con el SAT">Consultar por WhatsApp</a>
+                    </li>
+                    <li class="rounded-2xl border border-slate-200 bg-white p-5">
+                        <h3 class="font-bold text-slate-900">Vendo en plataformas</h3>
+                        <p class="my-2 text-sm text-slate-600">Contabilidad y revisión de retenciones de tus ventas o servicios.</p>
+                        <a href="https://wa.me/527861198800?text=Hola%2C%20C.P.%20Carlos.%20Vi%20la%20p%C3%A1gina%20de%20CABHEO.%20Me%20interesa%20la%20contabilidad%20para%20ventas%20o%20servicios%20en%20plataformas%20digitales." target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center text-sm font-semibold text-emerald-800 underline underline-offset-4" aria-label="Consultar por WhatsApp. Vendo en plataformas">Consultar por WhatsApp</a>
+                    </li>
+                    <li class="rounded-2xl border border-slate-200 bg-white p-5">
+                        <h3 class="font-bold text-slate-900">Necesito ayuda con nómina</h3>
+                        <p class="my-2 text-sm text-slate-600">Cálculo de nómina, recibos y trámites patronales.</p>
+                        <a href="https://wa.me/527861198800?text=Hola%2C%20C.P.%20Carlos.%20Vi%20la%20p%C3%A1gina%20de%20CABHEO.%20Me%20interesa%20el%20servicio%20de%20n%C3%B3mina%20para%20mi%20negocio." target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center text-sm font-semibold text-emerald-800 underline underline-offset-4" aria-label="Consultar por WhatsApp. Necesito ayuda con nómina">Consultar por WhatsApp</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section aria-labelledby="cotizador-titulo" class="bg-slate-100 py-8 sm:py-12">
+            <div class="mx-auto max-w-6xl px-3 sm:px-6">
+                <div id="cotizador-inicio" class="scroll-mt-[5.75rem] rounded-2xl border border-brand-800 bg-brand-950 p-3.5 text-white shadow-xl sm:p-6">
+                    <div class="mb-3 sm:mb-5">
+                        <h2 id="cotizador-titulo" class="text-xl font-bold sm:text-2xl">Cotizador transparente</h2>
+                        <p class="hidden text-sm text-slate-300 sm:block">Estima tu precio mensual con asesoría 1:1 y facturación incluidas.</p>
+                    </div>
+                    <div class="grid items-start gap-3 md:grid-cols-12 sm:gap-5">
+                        <div class="grid grid-cols-2 gap-x-2.5 gap-y-2.5 md:col-span-7 sm:gap-4">
+                            <div class="min-w-0">
+                                <label for="quote-person-type" class="mb-1 block text-sm font-semibold text-slate-200">Tipo de contribuyente</label>
+                                <select id="quote-person-type" onchange="selectPersonType(this.value)" class="block min-h-11 w-full rounded-lg border border-brand-500 bg-brand-900 px-2.5 text-base md:text-sm text-white [color-scheme:dark] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#8ab0f0]">
+                                    <option value="fisica">Persona Física</option>
+                                    <option value="moral">Persona Moral</option>
+                                </select>
+                            </div>
+                            <div class="min-w-0">
+                                <label for="quote-regime" class="mb-1 block text-sm font-semibold text-slate-200">Régimen fiscal</label>
+                                <select id="quote-regime" onchange="selectSubRegime(this.value)" class="block min-h-11 w-full rounded-lg border border-brand-500 bg-brand-900 px-2.5 text-base md:text-sm text-white [color-scheme:dark] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#8ab0f0]">
+                                    <option value="resico">RESICO</option>
+                                    <option value="empresarial">Actividad Empresarial</option>
+                                    <option value="digitales">Plataformas digitales</option>
+                                </select>
+                            </div>
+                            <div class="min-w-0">
+                                <label for="facturas-range" class="mb-1 block text-sm font-semibold text-slate-200">Facturas al mes</label>
+                                <select id="facturas-range" onchange="calculateQuote()" class="block min-h-11 w-full rounded-lg border border-brand-500 bg-brand-900 px-2.5 text-base md:text-sm text-white [color-scheme:dark] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#8ab0f0]">
+                                    <option value="1">1 a 20</option>
+                                    <option value="2">21 a 50</option>
+                                    <option value="3">51 a 120</option>
+                                    <option value="4">121 a 250</option>
+                                    <option value="5">Más de 250</option>
+                                </select>
+                            </div>
+                            <div class="min-w-0">
+                                <label for="empleados-range" class="mb-1 block text-sm font-semibold text-slate-200">Empleados</label>
+                                <select id="empleados-range" onchange="calculateQuote()" class="block min-h-11 w-full rounded-lg border border-brand-500 bg-brand-900 px-2.5 text-base md:text-sm text-white [color-scheme:dark] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#8ab0f0]">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                </select>
+                            </div>
+                            <label class="col-span-2 flex min-h-11 cursor-pointer items-center gap-2.5 rounded-lg border border-brand-700 bg-brand-900/60 px-3 py-2 text-sm">
+                                <input type="checkbox" id="addon-inventarios" class="h-4 w-4 shrink-0 accent-amber-400" onchange="calculateQuote()">
+                                <span>Control de inventarios <span class="text-xs text-amber-300">· Se cotiza aparte</span></span>
+                            </label>
+                            <p class="col-span-2 text-xs text-slate-300">Nómina: $100 por empleado al mes.</p>
+                        </div>
+
+                        <!-- Columna de Desglose y Resultado (5 columnas) -->
+                        <div class="md:col-span-5 rounded-xl border border-brand-700 bg-brand-900/90 p-2.5 sm:p-4">
+                            <div>
+                                <div class="flex flex-wrap items-center justify-between gap-1.5">
+                                    <span id="plan-badge" class="inline-block px-3 py-1 rounded-full bg-brand-500/30 text-[#8ab0f0] text-xs font-semibold">
+                                        Persona Física - RESICO
+                                    </span>
+                                    <span class="text-xs text-emerald-300 font-semibold bg-emerald-500/15 px-2.5 py-1 rounded-full">
+                                        IVA Incluido
+                                    </span>
+                                </div>
+
+                                <div class="flex items-baseline gap-2 my-1.5">
+                                    <span id="quote-price" aria-live="polite" class="text-3xl sm:text-4xl font-bold text-white">$600</span>
+                                    <span class="text-slate-300 text-sm">MXN / mes</span>
+                                </div>
+
+                                <!-- Desglose y entregables -->
+                                <details class="mt-2 border-t border-brand-700 pt-2 text-xs">
+                                    <summary class="cursor-pointer font-semibold text-slate-100">Ver desglose y servicios incluidos</summary>
+                                    <!-- Desglose Numérico Transparente -->
+                                <div class="mt-2 border-t border-brand-700 pt-2 space-y-1 text-xs">
+                                    <div class="flex justify-between text-slate-200">
+                                        <span id="breakdown-base-label">Base (1 a 20 facturas)</span>
+                                        <span id="breakdown-base-price" class="font-semibold text-white">$600</span>
+                                    </div>
+                                    <div class="flex justify-between text-emerald-300">
+                                        <span>Asesoría 1:1 y Facturación CFDI</span>
+                                        <span class="font-semibold">Incluido</span>
+                                    </div>
+                                    <div id="breakdown-nomina-row" class="hidden flex justify-between text-slate-200">
+                                        <span id="breakdown-nomina-label">Nómina (0 empleados x $100)</span>
+                                        <span id="breakdown-nomina-price" class="font-semibold text-white">$0</span>
+                                    </div>
+                                    <div id="breakdown-inventarios-row" class="hidden flex justify-between text-amber-300 pt-1">
+                                        <span>Control de Inventarios</span>
+                                        <span class="font-semibold">A consideración</span>
+                                    </div>
+                                </div>
+                                    <ul id="included-features" class="mt-2 space-y-1 text-slate-200"></ul>
+                                    <button type="button" onclick="prefillContactAndGo()" class="min-h-8 w-full px-2 text-sm font-medium text-white underline underline-offset-4 hover:text-slate-200">Agregar un comentario</button>
+                                </details>
+                            </div>
+
+                            <div class="mt-2 space-y-1.5">
+                                <p class="text-xs leading-relaxed text-slate-300">Precio estimado, sujeto a confirmación.</p>
+                                <button type="button" onclick="sendQuoteWhatsApp()" class="min-h-11 w-full rounded-xl whatsapp-cta px-3 py-2 font-semibold">Consultar por WhatsApp</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="director" aria-labelledby="director-titulo" class="py-16 bg-slate-100/70 border-t border-slate-200/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-12 gap-12 items-start">
+                    <!-- Perfil del Director -->
+                    <div class="lg:col-span-5 bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 text-brand-800 text-xs font-semibold mb-4">
+                            Conoce a tu contador
+                        </div>
+                        <h2 id="director-titulo" class="text-2xl sm:text-3xl font-bold text-slate-900 leading-tight">
+                            Carlos Baruch Hernández Olivares
+                        </h2>
+                        <p class="text-brand-500 font-semibold text-sm mt-1">
+                            Director General — <span class="font-serif tracking-wide">CABHEO</span> Despacho Contable
+                        </p>
+
+                        <p class="text-slate-600 text-sm mt-4 leading-relaxed">
+                            Soy Carlos Baruch Hernández Olivares. Desde hace más de <strong>6 años</strong> acompaño a personas físicas y empresas con su contabilidad y sus impuestos. También aplico mi formación en ingeniería económica y financiera para ayudarles a entender sus costos y tomar decisiones sobre su negocio.
+                        </p>
+
+                        <div class="mt-6 space-y-4 pt-6 border-t border-slate-100">
+                            <div class="flex items-start gap-3">
+                                <div class="bg-brand-100 text-brand-700 p-2 rounded-xl shrink-0">
+                                    <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 text-sm">Licenciatura en Contaduría y Finanzas</h4>
+                                    <p class="text-xs text-slate-500 mt-0.5">Dominio integral de normatividad fiscal, NIF y auditoría.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <div class="bg-emerald-100 text-emerald-700 p-2 rounded-xl shrink-0">
+                                    <i data-lucide="award" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 text-sm">Especialidad y Maestría en Ingeniería Económica y Financiera</h4>
+                                    <p class="text-xs text-slate-500 mt-0.5">Análisis de rentabilidad, valuación, costos y planeación financiera estratégica.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <div class="bg-amber-100 text-amber-700 p-2 rounded-xl shrink-0">
+                                    <i data-lucide="shield-check" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 text-sm">Atención Directa y Sin Intermediarios</h4>
+                                    <p class="text-xs text-slate-500 mt-0.5">Comunicación clara, reportes puntuales y acompañamiento continuo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8">
+                        <h3 class="text-2xl font-bold text-slate-900">¿Qué pasa después de escribir?</h3>
+                        <ol class="mt-5 list-decimal space-y-4 pl-6 text-sm leading-relaxed text-slate-700">
+                            <li><strong>Cuéntanos a qué te dedicas y qué necesitas.</strong> Para empezar basta un mensaje breve.</li>
+                            <li><strong>Carlos revisa tu caso contigo.</strong> Si hace falta, acuerdan una llamada para aclarar el alcance.</li>
+                            <li><strong>Recibes una propuesta.</strong> Podrás revisar qué incluye el servicio y cuánto cuesta antes de decidir.</li>
+                        </ol>
+                        <div class="mt-6"><a href="https://wa.me/527861198800?text=Hola%2C%20C.P.%20Carlos.%20Vi%20la%20p%C3%A1gina%20de%20CABHEO.%20Me%20gustar%C3%ADa%20contarle%20mi%20caso%20y%20conocer%20sus%20servicios." target="_blank" rel="noopener noreferrer" class="inline-flex min-h-12 items-center justify-center rounded-xl whatsapp-cta px-5 py-3 font-semibold">Contarle mi caso a Carlos</a></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Sección de Servicios -->
+        <section id="servicios" class="scroll-mt-24 py-20 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-500 font-bold text-xs uppercase tracking-widest">Nuestras Soluciones</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mt-2">Servicios Contables y Financieros</h2>
+                <p class="text-slate-600 mt-4 text-lg">
+                    Soluciones diseñadas a la medida de profesionistas, emprendedores en plataformas digitales, comercios y sociedades mercantiles.
+                </p>
+            </div>
+
+            <!-- Filtros de Servicios -->
+            <div class="flex flex-wrap justify-center gap-2 mb-12" id="service-filters">
+                <button data-filter="all" class="filter-btn active px-5 py-2.5 rounded-xl text-sm font-medium bg-brand-800 text-white transition-all">
+                    Todos los Servicios
+                </button>
+                <button data-filter="fiscal" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-medium bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all">
+                    Contabilidad e Impuestos
+                </button>
+                <button data-filter="nomina" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-medium bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all">
+                    Nómina y Operación
+                </button>
+                <button data-filter="estrategia" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-medium bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all">
+                    Ingeniería Financiera
+                </button>
+            </div>
+
+            <!-- Grid de Tarjetas de Servicios -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="services-grid">
+                <!-- Servicio 1 -->
+                <div class="service-card bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between" data-category="fiscal">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center mb-6">
+                            <i data-lucide="calculator" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Contabilidad General y Electrónica</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                            Registro y clasificación precisa de tus operaciones diarias, conciliaciones bancarias, emisión de balanzas de comprobación y estados financieros mensuales.
+                        </p>
+                    </div>
+                    <ul class="space-y-2.5 text-sm text-slate-700 border-t border-slate-100 pt-5">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-600"></i> Estados de Resultados y Balance General</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-600"></i> Conciliación de CFDI emitidos y recibidos</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-brand-600"></i> Envío de contabilidad electrónica al SAT</li>
+                    </ul>
+                </div>
+
+                <!-- Servicio 2 -->
+                <div class="service-card bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between" data-category="fiscal">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-6">
+                            <i data-lucide="file-check-2" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Impuestos por Régimen Fiscal</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                            Cálculo y presentación puntual de ISR, IVA, retenciones y DIOT especializados en RESICO, Actividad Empresarial, Servicios Digitales y Personas Morales.
+                        </p>
+                    </div>
+                    <ul class="space-y-2.5 text-sm text-slate-700 border-t border-slate-100 pt-5">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> Declaraciones provisionales y anuales</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> Gestión de devoluciones de saldos a favor</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> Vigilancia activa del Buzón Tributario</li>
+                    </ul>
+                </div>
+
+                <!-- Servicio 3 -->
+                <div class="service-card bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between" data-category="nomina">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-6">
+                            <i data-lucide="users" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Gestión de Nómina e IMSS</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                            Administración completa de tus colaboradores: cálculo de sueldos, timbrado de recibos de nómina, finiquitos y cumplimiento patronal ante IMSS e INFONAVIT.
+                        </p>
+                    </div>
+                    <ul class="space-y-2.5 text-sm text-slate-700 border-t border-slate-100 pt-5">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-600"></i> Altas, bajas y modificaciones (IDSE / SUA)</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-600"></i> Cálculo de cuotas obrero-patronales e ISN</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-600"></i> Timbrado puntual por empleado</li>
+                    </ul>
+                </div>
+
+                <!-- Servicio 4 -->
+                <div class="service-card bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between" data-category="nomina">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center mb-6">
+                            <i data-lucide="receipt" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Facturación y Control de Inventarios</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                            Emisión de CFDI 4.0 y complementos de pago incluidos en tu volumen mensual, además de diseño de control de inventarios y valuación a medida.
+                        </p>
+                    </div>
+                    <ul class="space-y-2.5 text-sm text-slate-700 border-t border-slate-100 pt-5">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-cyan-600"></i> Emisión de CFDI 4.0 y complementos de pago</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-cyan-600"></i> Control de entradas, salidas y Kardex</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-cyan-600"></i> Determinación de costo de lo vendido</li>
+                    </ul>
+                </div>
+
+                <!-- Servicio 5 -->
+                <div class="service-card bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between" data-category="estrategia">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center mb-6">
+                            <i data-lucide="line-chart" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Ingeniería Económica y Financiera</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                            Aplicamos modelos financieros avanzados para evaluar la rentabilidad de tus proyectos, optimizar flujos de efectivo y maximizar el valor de tu negocio.
+                        </p>
+                    </div>
+                    <ul class="space-y-2.5 text-sm text-slate-700 border-t border-slate-100 pt-5">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-purple-600"></i> Evaluación de proyectos de inversión</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-purple-600"></i> Análisis de costos y punto de equilibrio</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-purple-600"></i> Asesoría estratégica 1:1 incluida</li>
+                    </ul>
+                </div>
+
+                <!-- Servicio 6 -->
+                <div class="service-card bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between" data-category="estrategia">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center mb-6">
+                            <i data-lucide="shield-alert" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Regularización y Trámites SAT</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                            Ponemos al corriente declaraciones atrasadas, atendemos cartas invitación del SAT y te apoyamos con altas, cambios de régimen y sellos digitales.
+                        </p>
+                    </div>
+                    <ul class="space-y-2.5 text-sm text-slate-700 border-t border-slate-100 pt-5">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-rose-600"></i> Actualización de ejercicios omitidos</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-rose-600"></i> Obtención de Opinión de Cumplimiento (32-D)</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-rose-600"></i> Trámites de RFC, CSD y actualización de obligaciones</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Perfil Profesional y Reseñas de Clientes -->
+        <section id="recursos-destacados" aria-labelledby="recursos-titulo" class="border-t border-slate-200 bg-white py-12 sm:py-16">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-wrap items-end justify-between gap-3">
+                    <div>
+                        <h2 id="recursos-titulo" class="text-2xl font-bold text-slate-900 sm:text-3xl">Recursos para entender tu contabilidad</h2>
+                        <p class="mt-2 text-slate-600">Lecturas del C.P. Carlos Baruch sobre facturación, impuestos y decisiones de negocio.</p>
+                    </div>
+                    <button type="button" onclick="switchView('analisis')" class="min-h-11 rounded-xl border border-brand-500 px-4 text-sm font-semibold text-brand-800 hover:bg-brand-50">Ver todos los artículos</button>
+                </div>
+                <ul class="mt-6 grid gap-4 md:grid-cols-3">
+                    <li class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                        <h3 class="font-bold text-slate-900">Qué revisar en una factura</h3>
+                        <p class="mt-2 text-sm text-slate-600">Una introducción al CFDI 4.0 y a los datos que conviene verificar.</p>
+                        <button type="button" onclick="openArticle(1)" class="mt-2 min-h-11 text-sm font-semibold text-brand-800 underline underline-offset-4">Leer sobre facturación</button>
+                    </li>
+                    <li class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                        <h3 class="font-bold text-slate-900">Cómo entender RESICO</h3>
+                        <p class="mt-2 text-sm text-slate-600">Conoce el régimen y prepara tus preguntas antes de elegir un plan.</p>
+                        <button type="button" onclick="openArticle(2)" class="mt-2 min-h-11 text-sm font-semibold text-brand-800 underline underline-offset-4">Leer sobre RESICO</button>
+                    </li>
+                    <li class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                        <h3 class="font-bold text-slate-900">Cuánto necesitas vender para cubrir tus costos</h3>
+                        <p class="mt-2 text-sm text-slate-600">Entiende el punto de equilibrio y cómo te ayuda a evaluar tu negocio.</p>
+                        <button type="button" onclick="openArticle(3)" class="mt-2 min-h-11 text-sm font-semibold text-brand-800 underline underline-offset-4">Leer sobre punto de equilibrio</button>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Preguntas Frecuentes (FAQ) de inicio -->
+        <section id="preguntas-frecuentes" aria-labelledby="preguntas-titulo" class="border-t border-slate-200 bg-slate-100 py-12 sm:py-16">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10">
+                    <span class="text-brand-600 font-semibold text-sm uppercase tracking-wider">Resolvemos tus dudas</span>
+                    <h2 id="preguntas-titulo" class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Preguntas antes de contratar</h2>
+                </div>
+
+                <div class="space-y-4" id="faq-container">
+                    <details class="rounded-2xl border border-slate-200 bg-white px-6 py-4">
+                        <summary class="cursor-pointer font-semibold text-slate-900">¿Puedo escribir si no sé cuál es mi régimen fiscal?</summary>
+                        <p class="mt-3 text-sm leading-relaxed text-slate-600">Sí. Cuéntanos qué actividad realizas y qué necesitas resolver. Puedes empezar por WhatsApp sin usar el cotizador.</p>
+                    </details>
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+                        <button class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center font-semibold text-slate-900 hover:bg-slate-50 transition-colors">
+                            <span>¿Cómo funciona la facturación incluida en mi plan?</span>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform duration-200"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                            Dentro del rango de facturas que elijas (por ejemplo, de 1 a 20 facturas mensuales en el plan de $600 MXN IVA incluido), nosotros te apoyamos con la emisión de tus facturas de ingreso y complementos de pago sin cargos adicionales.
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+                        <button class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center font-semibold text-slate-900 hover:bg-slate-50 transition-colors">
+                            <span>¿Por qué el Control de Inventarios se cotiza a consideración?</span>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform duration-200"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                            Cada negocio maneja distinta cantidad de productos (SKU), presentaciones, almacenes y métodos de valuación. Realizamos una breve evaluación de tu operación para darte una propuesta justa y exacta.
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+                        <button class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center font-semibold text-slate-900 hover:bg-slate-50 transition-colors">
+                            <span>¿Qué necesito para iniciar mi contabilidad con Despacho CABHEO?</span>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform duration-200"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                            Cuéntanos qué actividad realizas y qué servicios necesitas. Evita compartir contraseñas o archivos de e.firma durante el primer contacto.
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8 rounded-2xl bg-brand-950 p-5 text-white sm:p-7">
+                    <h3 class="text-xl font-bold">¿Tienes otra pregunta?</h3>
+                    <p class="mt-2 text-sm text-slate-200">Cuéntame a qué te dedicas y qué necesitas resolver. Podemos empezar con un mensaje.</p>
+                    <a href="https://wa.me/527861198800?text=Hola%2C%20C.P.%20Carlos.%20Vi%20la%20p%C3%A1gina%20de%20CABHEO%20y%20tengo%20una%20duda%20sobre%20sus%20servicios.%20%C2%BFPodemos%20revisar%20mi%20caso%3F" target="_blank" rel="noopener noreferrer" class="whatsapp-cta mt-4 inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-2 font-semibold">Escríbeme por WhatsApp</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===================================================================== -->
+    <!-- VISTA 2: ANÁLISIS FISCALES, CONCEPTOS Y CONSEJOS     -->
+    <!-- ===================================================================== -->
+    <section id="view-analisis" class="view-section hidden py-16 lg:py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Encabezado de la sección -->
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
+                <div class="max-w-2xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 text-brand-800 text-xs font-semibold mb-3">
+                        <i data-lucide="book-open-check" class="w-3.5 h-3.5"></i>
+                        Centro de Conocimiento CABHEO
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-slate-900">Análisis Fiscal, Conceptos y Consejos</h2>
+                    <p class="text-slate-600 mt-3 text-base">
+                        Explicaciones claras desde lo más básico hasta ingeniería financiera avanzada, análisis de actualizaciones del SAT y respuestas reales a las dudas de nuestros clientes.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Barra de Filtros por Nivel / Categoría y Buscador -->
+            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm mb-10 flex flex-col md:flex-row justify-between gap-4">
+                <div class="flex flex-wrap gap-2" id="blog-filters">
+                    <button onclick="filterArticles('todos')" class="blog-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-brand-800 text-white transition-all" data-cat="todos">
+                        Todos los Temas
+                    </button>
+                    <button onclick="filterArticles('basico')" class="blog-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all" data-cat="basico">
+                        Nivel Básico (Para Empezar)
+                    </button>
+                    <button onclick="filterArticles('intermedio')" class="blog-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all" data-cat="intermedio">
+                        Actualizaciones y Regímenes
+                    </button>
+                    <button onclick="filterArticles('avanzado')" class="blog-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all" data-cat="avanzado">
+                        Nivel Avanzado / Finanzas
+                    </button>
+                    <button onclick="filterArticles('consejos')" class="blog-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all" data-cat="consejos">
+                        Consejos Prácticos
+                    </button>
+                </div>
+
+                <div class="relative min-w-[240px]">
+                    <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                    <input type="text" id="blog-search" oninput="renderArticles()" placeholder="Buscar tema (ej. RESICO, CFDI, deducciones)..." class="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-brand-500 outline-none">
+                </div>
+            </div>
+
+            <!-- Contenedor de Artículos y Análisis -->
+            <div id="articles-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
+                <!-- Se renderiza dinámicamente con JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal para Leer Artículo Completo -->
+    <div id="article-reader-modal" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[min(88vh,88dvh)] overflow-y-auto p-6 sm:p-9 shadow-2xl relative">
+            <button onclick="closeReaderModal()" class="sticky top-0 float-right bg-slate-100 hover:bg-slate-200 text-slate-700 p-2 rounded-full transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div id="reader-content"></div>
+        </div>
+    </div>
+
+    <section id="view-contacto" class="view-section hidden py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-brand-950 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-5">
+            <!-- Info de contacto -->
+            <div class="lg:col-span-2 bg-brand-900 p-8 sm:p-12 text-white flex flex-col justify-between">
+                <div>
+                    <span class="text-brand-300 text-xs font-semibold uppercase tracking-wider">Contacto Directo</span>
+                    <h2 class="text-3xl font-bold mt-1">Hablemos de tu contabilidad</h2>
+                    <p class="text-brand-100 mt-3 text-sm leading-relaxed">
+                        Escríbenos por WhatsApp o correo. Te responderé personalmente para revisar tu situación fiscal.
+                    </p>
+
+                    <div class="mt-9 space-y-6 text-sm">
+                        <a href="https://wa.me/527861198800" target="_blank" rel="noopener noreferrer" class="flex items-start gap-4 group">
+                            <div class="bg-emerald-500/20 text-emerald-400 p-2.5 rounded-xl group-hover:bg-emerald-500 group-hover:text-white transition-colors shrink-0">
+                                <i data-lucide="phone" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold group-hover:text-emerald-300 transition-colors">Teléfono y WhatsApp</p>
+                                <p class="text-brand-100 mt-0.5 font-medium text-base">786 119 8800</p>
+                            </div>
+                        </a>
+
+                        <a href="mailto:cpcarloshernandezo@gmail.com" class="flex items-start gap-4 group" target="_blank" rel="noopener noreferrer">
+                            <div class="bg-brand-800 text-brand-300 p-2.5 rounded-xl group-hover:bg-brand-500 group-hover:text-white transition-colors shrink-0">
+                                <i data-lucide="mail" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold group-hover:text-brand-300 transition-colors">Correo Electrónico</p>
+                                <p class="text-brand-100 mt-0.5 break-all">cpcarloshernandezo@gmail.com</p>
+                            </div>
+                        </a>
+
+                        <div class="flex items-start gap-4">
+                            <div class="bg-brand-800 text-brand-300 p-2.5 rounded-xl shrink-0">
+                                <i data-lucide="globe" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Modalidad de Atención</p>
+                                <p class="text-brand-100 mt-0.5">100% Digital en todo México • Lunes a Viernes 9:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Redes Sociales -->
+                    <div class="mt-9 pt-7 border-t border-brand-800">
+                        <p class="text-xs font-semibold uppercase tracking-wider text-brand-300 mb-3">Síguenos en Redes Sociales</p>
+                        <div class="flex gap-3">
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-brand-800">
+                    <p class="text-xs text-brand-200">
+                        C.P. y M.I.E.F. Carlos Baruch Hernández Olivares — Evita enviar contraseñas o archivos de e.firma en tu mensaje inicial.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Formulario -->
+            <div class="lg:col-span-3 p-8 sm:p-12 bg-white">
+                <form id="contact-form" class="space-y-5">
+                    <h3 class="text-xl font-bold text-slate-900">Prepara tu solicitud</h3>
+                    <label class="block text-sm font-medium text-slate-700">Nombre o razón social
+                        <input id="name" autocomplete="name" class="mt-2 block w-full rounded-xl border border-slate-300 px-4 py-3">
+                    </label>
+                    <label for="message" class="block text-sm font-medium text-slate-700">¿En qué podemos ayudarte?</label>
+                    <textarea id="message" required rows="7" class="block w-full rounded-xl border border-slate-300 px-4 py-3"></textarea>
+                    <p class="text-sm text-slate-600">Podrás revisar tu mensaje en WhatsApp antes de enviarlo.</p>
+                    <button type="submit" class="w-full rounded-xl bg-emerald-700 px-5 py-3 font-semibold text-white hover:bg-emerald-800">Abrir solicitud en WhatsApp</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-950 text-slate-400 py-12 border-t border-brand-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <div class="bg-white p-1.5 rounded-lg">
+                    <svg width="24" height="26" viewBox="0 0 68 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="6" y="24" width="16" height="44" fill="#2b5091"></rect>
+                        <rect x="22" y="18" width="16" height="44" fill="#1d3560"></rect>
+                        <rect x="38" y="12" width="16" height="44" fill="#364659"></rect>
+                        <line x1="53.2" y1="13" x2="53.2" y2="4" stroke="#0f172a" stroke-width="2.5"></line>
+                        <polygon points="53.2,0 49.5,6.5 56.9,6.5" fill="#0f172a"></polygon>
+                    </svg>
+                </div>
+                <div>
+                    <span class="font-serif font-bold text-white tracking-wider block leading-none">CABHEO</span>
+                    <span class="text-[11px] text-slate-400">Despacho Contable • C.P. y M.I.E.F. Carlos Baruch Hernández Olivares</span>
+                </div>
+            </div>
+            <p class="text-xs text-center">
+                © 2026 Despacho Contable CABHEO. Todos los derechos reservados.
+            </p>
+            <div class="flex items-center gap-5 text-xs">
+                
+                
+                <a href="https://wa.me/527861198800" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors flex items-center gap-1">
+                    <i data-lucide="phone" class="w-4 h-4"></i> 786 119 8800
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts de Interactividad -->
+    <script src="./assets/cabheo.js"></script>
+</body>
+</html>
