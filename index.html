@@ -7,6 +7,21 @@
     <meta property="og:title" content="CABHEO | Contabilidad e impuestos en línea">
     <meta property="og:description" content="Habla con el C.P. Carlos Baruch o estima tu plan contable mensual. Atención en línea en México.">
     <meta property="og:type" content="website">
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+    <script>
+        if (performance.getEntriesByType('navigation')[0]?.type === 'reload') {
+            history.scrollRestoration = 'manual';
+            if (location.hash) {
+                const url = new URL(location.href);
+                url.hash = '';
+                history.replaceState(history.state, '', url);
+            }
+            window.addEventListener('pageshow', () => {
+                window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+                history.scrollRestoration = 'auto';
+            }, { once: true });
+        }
+    </script>
     <!-- Tailwind CSS -->
     <script src="./assets/tailwind.js"></script>
     <!-- Lucide Icons -->
